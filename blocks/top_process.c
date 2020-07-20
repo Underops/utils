@@ -22,7 +22,7 @@ int main()
         for(int i = 0; i < 100; i++)
             if(name[i] == ' '){ name[i] = 0; break; }
         if(strlen(name) > 15)
-            if(name[0] == '/' || name[0] == '.')
+            if(name[0] == '/' || name[0] == '.' || name[1] == ':')
             {
                 for(int i = 0; i < 100; i++)
                 {
@@ -30,7 +30,7 @@ int main()
                     {
                         for(int j = i; j >= 0 ; j--)
                         {
-                            if(name[j] == '/')
+                            if(name[j] == '/' || name[j] == '\\')
                             {
                                 int k;
                                 for(k = 0; name[j+k] != 0; k++)
