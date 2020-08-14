@@ -11,16 +11,24 @@ int main()
         FILE *tp = popen("grep -A1 '^COMA' <<< $(top -b -1 -n2 -d2 -w99)", "r");
         usleep(2050000);
         for(int i = 0; i < 5; i++)
-	{
+        {
             fgets(name, 100, tp);
 //            fprintf(stdout, "[%d] %s", i, name);
-	}
+        }
         pclose(tp);
         for(int i = 95; i < 100; i++)
             if(name[i] == ','){ name[i] = '.'; break; }
         sscanf(&name[94], "%f", &usage);
         for(int i = 0; i < 100; i++)
-            if(name[i] == ' '){ name[i] = 0; break; }
+            if(name[i] == ' ')
+            {
+                if(name[i-7] == 'P' && name[i+1] == 'F')
+                {
+                    name[i] = '_';
+                    if(name[i+6] == ' ') name[i+6] = '_';
+                }
+                else { name[i] = 0; break; }
+            }
         if(strlen(name) > 15)
             if(name[0] == '/' || name[0] == '.' || name[1] == ':')
             {
