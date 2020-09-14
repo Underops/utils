@@ -8,13 +8,9 @@ int main()
     char name[100];
     while(1)
     {
-        FILE *tp = popen("grep -A1 '^COMA' <<< $(top -b -1 -n2 -d2 -w99)", "r");
+        FILE *tp = fopen("/tmp/top_grepped", "r");
         usleep(2050000);
-        for(int i = 0; i < 5; i++)
-        {
-            fgets(name, 100, tp);
-//            fprintf(stdout, "[%d] %s", i, name);
-        }
+        fgets(name, 100, tp);
         pclose(tp);
         for(int i = 95; i < 100; i++)
             if(name[i] == ','){ name[i] = '.'; break; }
