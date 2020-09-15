@@ -8,8 +8,8 @@ int main()
     char name[100];
     while(1)
     {
-        FILE *tp = fopen("/tmp/top_grepped", "r");
         usleep(2050000);
+        FILE *tp = fopen("/tmp/top_grepped", "r");
         fgets(name, 100, tp);
         pclose(tp);
         for(int i = 95; i < 100; i++)
