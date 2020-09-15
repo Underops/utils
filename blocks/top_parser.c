@@ -8,10 +8,16 @@ int main()
     char name[100];
     while(1)
     {
-        usleep(2050000);
+        START:
+        usleep(2000000);
         FILE *tp = fopen("/tmp/top_grepped", "r");
-        fgets(name, 100, tp);
-        pclose(tp);
+        if(fgets(name, 100, tp) == NULL)
+        {
+            fclose(tp);
+            goto START;
+        }
+        freopen("/tmp/top_grepped", "w", tp);
+        fclose(tp);
         for(int i = 95; i < 100; i++)
             if(name[i] == ','){ name[i] = '.'; break; }
         sscanf(&name[94], "%f", &usage);
@@ -49,6 +55,8 @@ int main()
             }
 	char out[25];
 	int len = strlen(name);
+    if(len > 16)
+        name[15] = 0;
 	strcpy(out, name);
 	for(int i = 0; i < 16-len; i++)
 	    out[i+len] = ' ';
