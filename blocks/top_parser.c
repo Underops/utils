@@ -53,21 +53,21 @@ int main()
                     }
                 }
             }
-	char out[25];
-	int len = strlen(name);
-    if(len > 16)
-        name[15] = 0;
-	strcpy(out, name);
-	for(int i = 0; i < 16-len; i++)
-	    out[i+len] = ' ';
-	int x = 15;
-	if(len > 16)
-	    out[15] = '+';
-	if(usage < 10)
-	    x++;
-	sprintf(&out[x], " %.1f%%", usage);
+    	char out[25];
+	    int len = strlen(name);
+        if(len > 16)
+            name[15] = 0;
+        strcpy(out, name);
+        for(int i = 0; i < 16-len; i++)
+        out[i+len] = ' ';
+        int x = 15;
+        if(len > 15)
+            out[14] = '+';
+        if(usage < 10)
+            x++;
+        sprintf(&out[x], " %.1f%%", usage);
         FILE *of = fopen("/tmp/top_process", "w+");
-	fputs(out, of);
-	fclose(of);
+        fputs(out, of);
+        fclose(of);
     }
 }
