@@ -53,8 +53,8 @@ int main()
                     }
                 }
             }
-    	char out[25];
-	    int len = strlen(name);
+        char out[25];
+        int len = strlen(name);
         if(len > 16)
             name[15] = 0;
         strcpy(out, name);
@@ -66,6 +66,9 @@ int main()
         if(usage < 10)
             x++;
         sprintf(&out[x], " %.1f%%", usage);
+        for(int i = 0; i < 21; i++)
+            if(out[i] == 0) out[i] = ' ';
+        out[21] = 0;
         FILE *of = fopen("/tmp/top_process", "w+");
         fputs(out, of);
         fclose(of);
