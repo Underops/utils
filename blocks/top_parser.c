@@ -29,7 +29,11 @@ int main()
                     name[i] = '_';
                     if(name[i+6] == ' ') name[i+6] = '_';
                 }
-                else { name[i] = 0; break; }
+                else if(name[i+1] == '-' || name[i+1] == ':' || name[i+1] == ' ')
+                {
+                    name[i] = 0;
+                    break;
+                }
             }
         if(strlen(name) > 15)
             if(name[0] == '/' || name[0] == '.' || name[1] == ':')
