@@ -27,8 +27,8 @@ int main(int argc, char **argv)
     lastIdle  = malloc(sizeof(long long int)*(t+1));
     for(int i = 0; i <= t; i++)
         lastTotal[i] = lastIdle[i] = 1;
-    char *line;
-    size_t size = 100;
+    char *line = malloc(100);
+    size_t size;
     for(;;)
     {
         FILE *stat = fopen("/proc/stat", "r");
