@@ -5,23 +5,25 @@
 int main()
 {
     float usage;
-    char name[100];
+    const int width = 150;
+    char name[width];
     while(1)
     {
         START:
         usleep(2000000);
         FILE *tp = fopen("/tmp/top_grepped", "r");
-        if(fgets(name, 100, tp) == NULL)
+        if(fgets(name, width, tp) == NULL)
         {
             fclose(tp);
             goto START;
         }
         freopen("/tmp/top_grepped", "w", tp);
         fclose(tp);
-        for(int i = 95; i < 100; i++)
+        for(int i = width-5; i < width; i++)
             if(name[i] == ','){ name[i] = '.'; break; }
-        sscanf(&name[94], "%f", &usage);
-        for(int i = 0; i < 100; i++)
+        sscanf(&name[width-6], "%f", &usage);
+        for(int i = 0; i < width; i++)
+        {
             if(name[i] == ' ')
             {
                 if(name[i-7] == 'P' && name[i+1] == 'F')
@@ -29,16 +31,17 @@ int main()
                     name[i] = '_';
                     if(name[i+6] == ' ') name[i+6] = '_';
                 }
-                else if(name[i+1] == '-' || name[i+1] == ':' || name[i+1] == ' ')
+                else if(name[i+1] == '-' || name[i+1] == ':' || name[i+1] == ' ' || name[i+1] == '/')
                 {
                     name[i] = 0;
                     break;
                 }
             }
+        }
         if(strlen(name) > 15)
             if(name[0] == '/' || name[0] == '.' || name[1] == ':')
             {
-                for(int i = 0; i < 100; i++)
+                for(int i = 0; i < width; i++)
                 {
                     if(name[i] == 0)
                     {

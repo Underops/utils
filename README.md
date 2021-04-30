@@ -1,4 +1,4 @@
 # utils
 Personal scripts/programs made for my system.
 
-Most of these are hard-coded for my setup and shall NOT work on yours without proper modification.
+Some of these only make sense when used together with my setup.
